@@ -5,6 +5,16 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+# Compatibility shim for unpickling scikit-learn ColumnTransformer across versions
+try:
+    import sklearn.compose._column_transformer as _ct
+    if not hasattr(_ct, "_RemainderColsList"):
+        class _RemainderColsList(list):
+            pass
+        _ct._RemainderColsList = _RemainderColsList
+except Exception:
+    pass
+
 from src.config import BEST_MODEL_PATH, TEST_RESULTS_PATH, VALIDATION_RESULTS_PATH
 from src.feature_engineering import add_time_features, drop_unused_columns
 

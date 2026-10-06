@@ -2,6 +2,16 @@ from typing import Union, Dict, List, Any
 import joblib
 import pandas as pd
 
+# Compatibility shim for unpickling scikit-learn ColumnTransformer across versions
+try:
+    import sklearn.compose._column_transformer as _ct
+    if not hasattr(_ct, "_RemainderColsList"):
+        class _RemainderColsList(list):
+            pass
+        _ct._RemainderColsList = _RemainderColsList
+except Exception:
+    pass
+
 from src.config import BEST_MODEL_PATH
 from src.feature_engineering import add_time_float, drop_unused_columns
 
