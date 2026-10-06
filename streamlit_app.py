@@ -15,7 +15,7 @@ try:
 except Exception:
     pass
 
-from src.config import BEST_MODEL_PATH, TEST_RESULTS_PATH, VALIDATION_RESULTS_PATH
+from src.config import BEST_MODEL_PATH
 from src.feature_engineering import add_time_features, drop_unused_columns
 
 st.set_page_config(
@@ -137,12 +137,6 @@ def load_trained_model():
     return joblib.load(BEST_MODEL_PATH)
 
 
-@st.cache_data
-def load_metrics_data():
-    val_df = pd.read_csv(VALIDATION_RESULTS_PATH) if Path(VALIDATION_RESULTS_PATH).exists() else None
-    test_df = pd.read_csv(TEST_RESULTS_PATH) if Path(TEST_RESULTS_PATH).exists() else None
-    return val_df, test_df
-
 
 def predict_time(model, raw_df: pd.DataFrame) -> np.ndarray:
     df = add_time_features(raw_df)
@@ -158,16 +152,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 model = load_trained_model()
-val_results, test_results = load_metrics_data()
 
 if model is None:
     st.error(f"Model artifact not found at {BEST_MODEL_PATH}. Please run 'python3 -m src.save_model' first.")
     st.stop()
 
-tab_predict, tab_batch, tab_analytics = st.tabs([
+tab_predict, tab_batch = st.tabs([
     "⚡ Real-Time ETA Predictor",
-    "📂 Batch CSV Inference",
-    "📊 Model Performance & Benchmarks"
+    "📂 Batch CSV Inference"
 ])
 
 with tab_predict:
@@ -367,41 +359,3 @@ with tab_batch:
         except Exception as e:
             st.error(f"Error processing batch predictions: {e}")
 
-with tab_analytics:
-    st.subheader("📊 Model Evaluation & Benchmarking Dashboard")
-
-    m_col1, m_col2, m_col3, m_col4 = st.columns(4)
-    with m_col1:
-        st.metric("Test MAE ⭐", "3.06 min", "-0.97m vs Baseline")
-    with m_col2:
-        st.metric("Test RMSE", "6.26 min", "-0.13m vs Baseline")
-    with m_col3:
-        st.metric("Test R²", "0.6630", "+1.39% Explained")
-    with m_col4:
-        st.metric("Best Architecture", "Stacking", "RidgeCV Meta-Model")
-
-    st.markdown("---")
-
-    b_col1, b_col2 = st.columns([1.2, 0.8], gap="large")
-
-    with b_col1:
-        st.markdown("##### 🏆 Validation Model Comparison (15% Split)")
-        if val_results is not None:
-            formatted_val = val_results.copy()
-            formatted_val["MAE"] = formatted_val["MAE"].apply(lambda x: f"{x:.4f} min")
-            formatted_val["RMSE"] = formatted_val["RMSE"].apply(lambda x: f"{x:.4f} min")
-            formatted_val["MSE"] = formatted_val["MSE"].apply(lambda x: f"{x:.2f}")
-            formatted_val["R2"] = formatted_val["R2"].apply(lambda x: f"{x:.4f}")
-            st.dataframe(formatted_val, hide_index=True)
-        else:
-            st.info("Validation results table not found.")
-
-    with b_col2:
-        st.markdown("##### 🎯 Final Test Evaluation (Untouched 15% Split)")
-        if test_results is not None:
-            st.dataframe(test_results, hide_index=True)
-
-        st.markdown("""
-        > **Why MAE is Primary**:
-        > In food delivery ETA systems, users and operations interpret performance directly in minutes off the target. An **MAE of 3.06m** means predictions are within ~3 minutes of actual delivery on average.
-        """)
