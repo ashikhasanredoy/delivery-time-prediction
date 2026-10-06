@@ -1,0 +1,26 @@
+order_id,order_placed_at,restaurant_id,cuisine,restaurant_avg_prep_minutes,city_zone,distance_km,items_count,order_subtotal,courier_vehicle,courier_trips_completed,weather
+800001,2025-03-15 12:30:00,10,pizza,12.9,downtown,1.5,2,24.50,scooter,150,clear
+800002,2025-03-15 13:15:00,28,indian,19.5,midtown,3.8,4,52.80,car,340,rain
+800003,2025-03-15 19:45:00,81,sushi,17.4,downtown,0.8,3,48.20,bike,75,cloudy
+800004,2025-03-15 20:10:00,145,pizza,12.3,suburbs_north,6.2,3,38.90,car,520,heavy_rain
+800005,2025-03-15 01:20:00,144,chinese,7.6,uptown,2.1,1,14.50,scooter,88,clear
+800006,2025-03-16 11:45:00,156,salads,9.4,midtown,1.2,2,21.00,bike,210,clear
+800007,2025-03-16 18:20:00,47,mexican,14.1,suburbs_south,4.5,5,64.30,scooter,45,rain
+800008,2025-03-16 19:05:00,118,thai,15.5,downtown,2.7,2,29.75,bike,315,clear
+800009,2025-03-16 20:30:00,37,pizza,17.5,suburbs_north,5.1,4,42.00,car,190,heavy_rain
+800010,2025-03-16 22:15:00,101,burger,11.8,uptown,3.2,2,23.50,scooter,620,cloudy
+800011,2025-03-17 12:05:00,122,indian,20.0,downtown,1.9,1,18.90,bike,95,clear
+800012,2025-03-17 13:40:00,59,pizza,11.7,suburbs_south,3.9,3,31.25,car,410,rain
+800013,2025-03-17 17:50:00,93,sushi,16.7,midtown,2.4,2,36.50,scooter,180,clear
+800014,2025-03-17 19:15:00,148,indian,16.9,suburbs_north,7.5,6,82.00,car,950,heavy_rain
+800015,2025-03-17 21:00:00,17,thai,9.8,downtown,1.1,2,22.40,bike,130,cloudy
+800016,2025-03-18 08:30:00,156,salads,12.7,uptown,2.9,1,16.00,scooter,410,clear
+800017,2025-03-18 12:45:00,107,sushi,18.0,midtown,3.5,4,58.90,car,275,rain
+800018,2025-03-18 14:10:00,4,pizza,14.0,suburbs_south,4.8,2,26.80,scooter,85,cloudy
+800019,2025-03-18 19:30:00,39,thai,21.0,downtown,1.6,3,37.50,bike,520,clear
+800020,2025-03-18 20:45:00,100,burger,12.8,suburbs_north,5.8,5,61.20,car,160,heavy_rain
+800021,2025-03-19 11:30:00,15,indian,18.1,downtown,0.9,1,15.50,bike,45,clear
+800022,2025-03-19 13:00:00,144,chinese,7.6,midtown,2.0,2,28.00,scooter,330,rain
+800023,2025-03-19 18:40:00,3,pizza,20.9,suburbs_south,6.0,4,49.90,car,720,cloudy
+800024,2025-03-19 21:20:00,41,thai,19.0,uptown,3.1,2,30.40,scooter,195,clear
+800025,2025-03-19 23:45:00,10,pizza,12.9,downtown,1.8,2,25.00,bike,60,clear
